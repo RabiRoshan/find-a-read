@@ -5,7 +5,7 @@ import { Fira_Sans_Condensed } from "next/font/google";
 const inter = Fira_Sans_Condensed({ subsets: ["latin"] ,weight: "400"});
 
 export const metadata: Metadata = {
-  title: "Find A Book",
+  title: "Find A Read",
   description:
     "Your gateway to explore, discover, and dive into the world of books with just a keyword.",
 };
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header className="p-4 text-center">
-          <h1 className="text-4xl font-semibold text-teal-500">Find-A-Book</h1>
+          <h1 className="text-4xl font-semibold text-teal-500">Find-A-Read</h1>
         </header>
         {children}
       </body>

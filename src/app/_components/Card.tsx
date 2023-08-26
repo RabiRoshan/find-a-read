@@ -8,8 +8,8 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({
   title,
-  imageUrl = "https://books.google.co.in/googlebooks/images/no_cover_thumb.gif",
-  description = "<No description available>",
+  imageUrl,
+  description,
   secondaryDescription,
   handleOnClick,
 }) => {

@@ -16,30 +16,38 @@ export default async function fetchBooks(
 
   try {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&startIndex=${startIndex}&maxResults=${maxResults}`
+      `http://127.0.0.1:8000/books/${searchTerm}?start_index=${startIndex}&max_results=${maxResults}`
     );
-
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    return data.items;
+
+    // Map the data to the Book interface
+    return data.map(
+      (book: any): Book => ({
+        id: book.id,
+        title: book.title,
+        description: book.description ?? "No description available",
+        image:
+          book.image ??
+          "https://books.google.co.in/googlebooks/images/no_cover_thumb.gif",
+        authors: book.authors ?? undefined,
+        previewUrl: book.preview_url,
+      })
+    );
   } catch (error) {
     console.error("Error fetching books:", error);
     throw error;
   }
 }
 
-interface VolumeInfo {
-  title: string;
-  description: string;
-  imageLinks: { smallThumbnail: string; thumbnail: string };
-  authors: string[];
-  previewLink: string;
-}
-
 export interface Book {
   id: string;
-  volumeInfo: VolumeInfo;
+  title: string;
+  description: string;
+  image: string;
+  authors: string[];
+  previewUrl: string;
 }

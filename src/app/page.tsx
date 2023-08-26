@@ -1,8 +1,4 @@
-import fetchBooks, { Book } from "./_data/fetchBooksApi";
-import SearchBox from "./_components/SearchBox";
-import Button from "./_components/Button";
-import Card from "./_components/Card";
-import BookCard from "./BookCard";
+import fetchBooks from "./_data/fetchBooksApi";
 import BookSearchBox from "./BookSearchBox";
 import BooksList from "./BooksList";
 import { randomUUID } from "crypto";
@@ -13,7 +9,17 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = async ({ searchParams }) => {
   const search = searchParams.q ? searchParams.q.toString() : "";
-  const books = search ? await fetchBooks(search) : null;
+  let books;
+  let fetchError = false;
+
+  if (search) {
+    try {
+      books = await fetchBooks(search);
+    } catch (error) {
+      fetchError = true;
+    }
+  }
+
   return (
     <>
       <div className="px-5 pl-5 sm:flex justify-center">
@@ -25,12 +31,16 @@ const Page: React.FC<PageProps> = async ({ searchParams }) => {
           <Button handleOnClick={handleSurpriseMeClick}>Surprise Me!</Button>
         </div> */}
       </div>
-      {books && (
-        <BooksList
-          key={randomUUID()}
-          initialBooks={books}
-          searchTerm={search}
-        />
+      {fetchError ? (
+        <div className="banner">Not Found</div>
+      ) : (
+        books && (
+          <BooksList
+            key={randomUUID()}
+            initialBooks={books}
+            searchTerm={search}
+          />
+        )
       )}
     </>
   );
