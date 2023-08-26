@@ -22,13 +22,15 @@ const Card: React.FC<CardProps> = ({
         sm:flex-row sm:h-64
       "
     >
-      <img
-        className="
-          object-cover w-full rounded-t-lg drop-shadow
-          sm:w-64 sm:rounded-lg
-        "
-        src={imageUrl}
-      />
+      <div className="sm:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/2">
+        <img
+          className="
+            w-full rounded-t-lg drop-shadow
+            sm:h-full sm:rounded-lg
+          "
+          src={imageUrl}
+        />
+      </div>
       <div
         className="
         flex flex-col justify-between p-4 leading-normal

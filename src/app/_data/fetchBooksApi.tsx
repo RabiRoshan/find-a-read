@@ -1,3 +1,5 @@
+"use server";
+
 // `fetchBooks` is a function that fetches books from the Google Books API
 // and returns the response as JSON. It takes in three parameters:
 // - searchTerm: string
@@ -6,7 +8,7 @@
 export default async function fetchBooks(
   searchTerm: string,
   startIndex: number = 0,
-  maxResults: number = 1
+  maxResults: number = 30
 ): Promise<Book[]> {
   // Ensure startIndex and maxResults are within valid range
   startIndex = Math.max(0, startIndex);
