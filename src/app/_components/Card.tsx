@@ -1,41 +1,57 @@
 interface CardProps {
-  imageUrl: string;
   title: string;
+  imageUrl: string;
   description: string;
-  authors: string[];
-  previewLink: string;
+  secondaryDescription: string;
+  handleOnClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const Card: React.FC<CardProps> = ({
   title,
-  description,
   imageUrl = "https://books.google.co.in/googlebooks/images/no_cover_thumb.gif",
-  authors,
-  previewLink,
+  description = "<No description available>",
+  secondaryDescription,
+  handleOnClick,
 }) => {
   return (
     <div
-      onClick={() => {
-        window.open(previewLink, "_blank");
-      }}
-      className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 hover:cursor-pointer"
+      onClick={handleOnClick}
+      className="
+        flex flex-col bg-white border border-gray-200 rounded-lg drop-shadow w-full
+        hover:bg-gray-100 hover:cursor-pointer
+        sm:flex-row sm:h-64
+      "
     >
       <img
-        className="object-cover w-full rounded-t-lg h-96 md:h-48 md:w-48 md:rounded-none md:rounded-l-lg"
+        className="
+          object-cover w-full rounded-t-lg drop-shadow
+          sm:w-64 sm:rounded-lg
+        "
         src={imageUrl}
       />
-      <div className="flex flex-col justify-between p-4 leading-normal">
-        <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 line-clamp-1">
+      <div
+        className="
+        flex flex-col justify-between p-4 leading-normal
+        sm:w-full
+        "
+      >
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 line-clamp-1">
           {title}
         </h1>
-        {description && (
-          <p className="mb-3 font-normal text-gray-700 line-clamp-6">
-            {description}
-          </p>
-        )}
-        {authors && (
-          <p className="mb-3 font-normal text-gray-700 line-clamp-1">
-            By {authors.join(", ")}
+        <p
+          className="
+           font-normal text-gray-700 line-clamp-6
+          "
+        >
+          {description}
+        </p>
+        {secondaryDescription && (
+          <p
+            className="
+             font-normal text-gray-500 line-clamp-1
+            "
+          >
+            {secondaryDescription}
           </p>
         )}
       </div>

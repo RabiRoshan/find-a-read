@@ -52,22 +52,29 @@ const Home = () => {
           <Button handleOnClick={handleSurpriseMeClick}>Surprise Me!</Button>
         </div>
       </div>
-
-      <div className="flex flex-col p-5 gap-2 flex-wrap mx-auto items-center lg:grid lg:grid-cols-3 lg:gap-4 2xl:grid-cols-5">
-        {data?.map((book) => (
-          <Card
-            key={book.id}
-            title={book.volumeInfo.title}
-            description={book.volumeInfo.description}
-            imageUrl={
-              book.volumeInfo.imageLinks?.thumbnail ||
-              book.volumeInfo.imageLinks?.smallThumbnail
-            }
-            authors={book.volumeInfo.authors}
-            previewLink={book.volumeInfo.previewLink}
-          />
-        ))}
-      </div>
+      {data && (
+        <div className="flex flex-col p-5 gap-2 flex-wrap mx-auto items-center lg:grid lg:grid-cols-2 lg:gap-4 2xl:w-3/4 2xl:grid-cols-3">
+          {data?.map((book) => (
+            <Card
+              key={book.id}
+              title={book.volumeInfo.title}
+              imageUrl={
+                book.volumeInfo.imageLinks?.thumbnail ||
+                book.volumeInfo.imageLinks?.smallThumbnail
+              }
+              description={book.volumeInfo.description}
+              secondaryDescription={
+                book.volumeInfo.authors
+                  ? "By " + book.volumeInfo.authors.join(", ")
+                  : ""
+              }
+              handleOnClick={() => {
+                window.open(book.volumeInfo.previewLink, "_blank");
+              }}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };
