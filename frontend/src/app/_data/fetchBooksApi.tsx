@@ -16,7 +16,7 @@ export default async function fetchBooks(
 
   try {
     const response = await fetch(
-      `http://127.0.0.1:8000/books/${searchTerm}?start_index=${startIndex}&max_results=${maxResults}`
+      `http://127.0.0.1/books/${searchTerm}?start_index=${startIndex}&max_results=${maxResults}`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
