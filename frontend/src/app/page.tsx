@@ -4,11 +4,16 @@ import BooksList from "./BooksList";
 import { randomUUID } from "crypto";
 
 const quotes = [
-  "A room without books is like a body without a soul.",
-  "So many books, so little time.",
-  "I have always imagined that Paradise will be a kind of library.",
-  "In a good bookroom you feel in some mysterious way that you are absorbing the wisdom contained in all the books through your skin, without even opening them.",
-  "Books are a uniquely portable magic.",
+  "Books are the plane, and the train, and the road. They are the destination, and the journey. They are home. - Anna Quindlen",
+  "I have always imagined that Paradise will be a kind of library. Just the same, a library is a kind of paradise. - Jorge Luis Borges",
+  "Books are mirrors: you only see in them what you already have inside you. - Carlos Ruiz Zafón, The Shadow of the Wind",
+  "A book, too, can be a star, a living fire to lighten the darkness, leading out into the expanding universe. - Madeleine L'Engle",
+  "A book is a dream that you hold in your hand. Whenever you want to see it, all you have to do is open your eyes. - Neil Gaiman",
+  "Reading is a basic tool in the living of a good life. It is like a shield, a sword, a wall, a fortress, it gives us freedom. - Mortimer J. Adler",
+  "Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers. - Charles W. Eliot",
+  "Reading is the sole means by which we slip, involuntarily, often helplessly, into another's skin, another's voice, another's soul. - Joyce Carol Oates",
+  "Reading gives us someplace to go when we have to stay where we are. - Mason Cooley",
+  "Books are a uniquely portable magic. No matter where you are, you can open a book and be transported to a completely different world. - Stephen King",
 ];
 
 interface PageProps {
@@ -39,11 +44,12 @@ const Page: React.FC<PageProps> = async ({ searchParams }) => {
       </div>
       {fetchError ? (
         <div className="text-center mt-64 w-1/2 mx-auto flex justify-center items-center text-xl font-semibold text-red-500">
-          Oops! The book you are looking for is not available. Please try again with a different keyword!
+          Oops! The book you are looking for is not available. Please try again
+          with a different keyword!
         </div>
       ) : search === "" ? (
         <div className="text-center mt-64 w-1/2 mx-auto flex justify-center items-center text-xl font-semibold text-teal-500">
-          "{randomQuote}"
+          &quot;{randomQuote}&quot;
         </div>
       ) : (
         books && (
