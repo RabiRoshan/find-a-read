@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import SearchBox from "./_components/SearchBox";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounce } from "use-debounce";
 
 interface BookSearchBoxProps {
@@ -12,15 +12,23 @@ interface BookSearchBoxProps {
 const BookSearchBox: FC<BookSearchBoxProps> = ({ query }) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState(query);
+  const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 750);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    setIsLoading(true);
     if (debouncedSearchTerm) {
       router.push(`/?q=${debouncedSearchTerm}`);
     } else {
       router.push(`/`);
     }
   }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [pathname, searchParams]);
 
   return (
     <SearchBox
@@ -29,6 +37,7 @@ const BookSearchBox: FC<BookSearchBoxProps> = ({ query }) => {
       onChange={function (event: ChangeEvent<HTMLInputElement>): void {
         setSearchTerm(event.target.value);
       }}
+      isLoading={isLoading}
     />
   );
 };
