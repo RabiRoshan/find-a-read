@@ -10,6 +10,7 @@ This is a simple book search application that allows users to search for their f
 - [Running the App](#running-the-app)
 - [Development Progress](#development-progress)
 - [Deployment Details](#deployment-details)
+- [Demo](#demo)
 
 ## Features
 
@@ -87,22 +88,30 @@ Now, the frontend server should be running at `http://localhost:3000` and the ba
 - [x] Setup backend with FastAPI
 - [x] Connect to Google Books API
 - [x] Implement book search feature
+- [x] Utilize query params in the frontend app as well
 - [x] Make the app responsive accross all the size(s)
-- [ ] Write tests for the application
+- [x] Implement Infinite scroll load feature with Loading Card Skeleton (Advanced Styling)
+- [x] Show loading indicator when search term changes
+- [ ] Write tests for the app(s)
 - [ ] Implement book details view
 - [ ] Implement user authentication
 - [ ] Implement user favourite(s) feature
 - [x] Dockerize the app(s)
 - [x] Deploy on aws
+- [ ] Setup CI/CD
 
 ## Deployment Details
 
 1. Create a Dockerfile for both frontend and backend.
 2. Build and push the Docker images to Amazon Elastic Container Registry (ECR).
-3. Create a new task definition on Amazon ECS and specify the Docker images.
-4. Create a new ECS cluster.
-5. Create a new service within the ECS cluster using the task definition.
-6. Monitor the application using Amazon CloudWatch.
+3. Create a new task definition on Amazon ECS with both the Docker images.
+4. Create a new cluster on ECS.
+5. Create a new service within the cluster using the task definition.
+6. Update the security group to give sufficient inbound network access.
+
+## Demo
+
+Please visit: http://50.19.195.183:8080/
 
 ## License
 
